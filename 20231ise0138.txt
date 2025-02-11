@@ -1,0 +1,264 @@
+
+mysql> create database presidency;
+Query OK, 1 row affected (0.11 sec)
+
+mysql> use presidency;
+Database changed
+
+mysql>  create table student( snum int primary key, sname varchar(20)not null, major varchar(5)not null, level char(5), dob date);
+Query OK, 0 rows affected (0.31 sec)
+
+mysql> insert into student values('138','kumud','ise','soe','2000-05-01');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into student values('139','deekshitha','ise','soe','2000-05-01');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into student values('140','prakruthi','ise','soe','2000-05-01');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into student values('141','bhargavi','ise','soe','2000-05-01');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into student values('142','amrutha','ise','soe','2000-05-01');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select*from student;
++------+------------+-------+-------+------------+
+| snum | sname      | major | level | dob        |
++------+------------+-------+-------+------------+
+|  138 | kumud      | ise   | soe   | 2000-05-01 |
+|  139 | deekshitha | ise   | soe   | 2000-05-01 |
+|  140 | prakruthi  | ise   | soe   | 2000-05-01 |
+|  141 | bhargavi   | ise   | soe   | 2000-05-01 |
+|  142 | amrutha    | ise   | soe   | 2000-05-01 |
++------+------------+-------+-------+------------+
+5 rows in set (0.00 sec)
+
+mysql> create table faculty(fid int primary key auto_increment,fname varchar(20)not null,address varchar(20),deptid int);
+Query OK, 0 rows affected (0.33 sec)
+
+mysql> insert into faculty values('100','muttukumar','tamilnadu',301);
+Query OK, 1 row affected (0.15 sec)
+
+mysql> insert into faculty values('110','anitha','tamilnadu',301);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into faculty values('115','kusuma','tamilnadu',301);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into faculty values('118','shivani','tamilnadu',301);
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into faculty values('119','prasamyha','tamilnadu',301);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select*from faculty;
++-----+------------+-----------+--------+
+| fid | fname      | address   | deptid |
++-----+------------+-----------+--------+
+| 100 | muttukumar | tamilnadu |    301 |
+| 110 | anitha     | tamilnadu |    301 |
+| 115 | kusuma     | tamilnadu |    301 |
+| 118 | shivani    | tamilnadu |    301 |
+| 119 | prasamyha  | tamilnadu |    301 |
++-----+------------+-----------+--------+
+5 rows in set (0.00 sec)
+
+mysql> create table course(cname varchar(10) primary key,meets_at varchar(10),room varchar(5),fid integer,foreign key(fid)references faculty(fid)on delete cascade);
+Query OK, 0 rows affected (0.47 sec)
+
+mysql> insert into course values('cse','9:00','r05',100);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into course values('ise','9:00','r05',115);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into course values('ccs','9:00','r05',118);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into course values('cds','9:00','r05',110);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into course values('ciot','9:00','r05',119);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select*from course;
++-------+----------+------+------+
+| cname | meets_at | room | fid  |
++-------+----------+------+------+
+| ccs   | 9:00     | r05  |  118 |
+| cds   | 9:00     | r05  |  110 |
+| ciot  | 9:00     | r05  |  119 |
+| cse   | 9:00     | r05  |  100 |
+| ise   | 9:00     | r05  |  115 |
++-------+----------+------+------+
+5 rows in set (0.00 sec)
+
+mysql> create table enroll(snum integer,cname varchar(10),primary key(snum,cname),foreign key(snum) references student(snum) on delete cascade,foreign key(cname) references course(cname) on delete cascade);
+Query OK, 0 rows affected (0.53 sec)
+
+mysql> select sname,major from student;
++------------+-------+
+| sname      | major |
++------------+-------+
+| kumud      | ise   |
+| deekshitha | ise   |
+| prakruthi  | ise   |
+| bhargavi   | ise   |
+| amrutha    | ise   |
++------------+-------+
+5 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| presidency         |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> use presidency;
+Database changed
+
+mysql> show tables;
++----------------------+
+| Tables_in_presidency |
++----------------------+
+| course               |
+| enroll               |
+| faculty              |
+| student              |
++----------------------+
+4 rows in set (0.00 sec)
+
+mysql> select sname,major from student;
++------------+-------+
+| sname      | major |
++------------+-------+
+| kumud      | ise   |
+| deekshitha | ise   |
+| prakruthi  | ise   |
+| bhargavi   | ise   |
+| amrutha    | ise   |
++------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> INSERT INTO enroll (snum, cname) VALUES (138, 'ise');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> INSERT INTO enroll (snum, cname) VALUES (139, 'ccs');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> INSERT INTO enroll (snum, cname) VALUES (140, 'cds');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> INSERT INTO enroll (snum, cname) VALUES (141, 'ciot');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> INSERT INTO enroll (snum, cname) VALUES (142, 'cse');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select*from enroll;
++------+-------+
+| snum | cname |
++------+-------+
+|  139 | ccs   |
+|  140 | cds   |
+|  141 | ciot  |
+|  142 | cse   |
+|  138 | ise   |
++------+-------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT s.snum, s.sname, s.major FROM student s, enroll e WHERE e.snum = s.snum AND e.cname = 'presidency';
+Empty set (0.00 sec)
+
+mysql> SELECT s.snum, s.sname, s.major FROM student s, enroll e WHERE e.snum = s.snum AND e.cname = 'ise';
++------+-------+-------+
+| snum | sname | major |
++------+-------+-------+
+|  138 | kumud | ise   |
++------+-------+-------+
+1 row in set (0.00 sec)
+
+mysql> SELECT s.snum, s.sname, s.major FROM student s, enroll e WHERE e.snum = s.snum AND e.cname = 'cse';
++------+---------+-------+
+| snum | sname   | major |
++------+---------+-------+
+|  142 | amrutha | ise   |
++------+---------+-------+
+1 row in set (0.00 sec)
+
+mysql> SELECT s.snum, s.sname, s.major FROM student s, enroll e WHERE e.snum = s.snum AND e.cname = 'ciot';
++------+----------+-------+
+| snum | sname    | major |
++------+----------+-------+
+|  141 | bhargavi | ise   |
++------+----------+-------+
+1 row in set (0.00 sec)
+
+mysql> SELECT s.snum, s.sname, s.major FROM student s, enroll e WHERE e.snum = s.snum AND e.cname = 'cds';
++------+-----------+-------+
+| snum | sname     | major |
++------+-----------+-------+
+|  140 | prakruthi | ise   |
++------+-----------+-------+
+1 row in set (0.00 sec)
+
+mysql> SELECT s.snum, s.sname, s.major FROM student s, enroll e WHERE e.snum = s.snum AND e.cname = 'ccs';
++------+------------+-------+
+| snum | sname      | major |
++------+------------+-------+
+|  139 | deekshitha | ise   |
++------+------------+-------+
+1 row in set (0.00 sec)
+
+mysql> select c.cname, f.fname from course c, faculty f where c.fid = f.fid;
++-------+------------+
+| cname | fname      |
++-------+------------+
+| cse   | muttukumar |
+| cds   | anitha     |
+| ise   | kusuma     |
+| ccs   | shivani    |
+| ciot  | prasamyha  |
++-------+------------+
+5 rows in set (0.04 sec)
+
+mysql> SELECT s.snum, s.sname, c.cname FROM student s, enroll e, course c, faculty f WHERE s.snum = e.snum   AND e.cname = c.cname   AND c.fid = f.fid   AND f.fname = 'kusuma';
++------+-------+-------+
+| snum | sname | cname |
++------+-------+-------+
+|  138 | kumud | ise   |
++------+-------+-------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MIN(snum) FROM student WHERE major = 'ise';
++-----------+
+| MIN(snum) |
++-----------+
+|       138 |
++-----------+
+1 row in set (0.00 sec)
+
+
+mysql> select major,count(*)as total_students from student group by major;
++-------+----------------+
+| major | total_students |
++-------+----------------+
+| ise   |              5 |
++-------+----------------+
+1 row in set (0.00 sec)
