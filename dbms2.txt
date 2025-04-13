@@ -1,0 +1,113 @@
+select database();
+create table shirts(
+shirt_type varchar(50),
+quantity int
+);
+insert into shirts(shirt_type,quantity)values("formal",12);
+insert into shirts(shirt_type,quantity)values("laglah",89);
+insert into shirts(shirt_type,quantity)values("lbbb",90);
+select*from shirts;
+select quantity from shirts;
+select*from shirts where quantity=12;
+select*from shirts where quantity<50;
+select*from shirts where quantity>50;
+select shirt_type from shirts where quantity>=50;
+select shirt_type from shirts where quantity<=50;
+select*from shirts where quantity>12 AND quantity<100;
+select*from shirts where quantity>12 OR quantity<10;
+select*from shirts where quantity between 10 and 100;
+select*from shirts where not shirt_type="lbbb";
+insert into shirts(shirt_type)values("party wear");
+select*from shirts;
+insert into shirts(quantity)value(35);
+select*from shirts;
+create table customers(
+id int not null auto_increment,
+cust_name varchar(50) not null,
+email varchar(50) not null default'no email',
+amount int,
+primary key(id)
+);
+show tables;
+insert into customers(cust_name,email,amount)values("kumuda","kumu@1234",500);
+insert into customers(cust_name,email,amount)values("ammu","ammu@1234",500);
+insert into customers(cust_name,amount)values("nammu",599);
+insert into customers(cust_name,email,amount)values("munnu","munnu@1234",500);
+insert into customers(cust_name,email,amount)values("rannu","rannu@1234",500);
+insert into customers(cust_name,email,amount)values("meena","meena@1234",500);
+select*from customers;
+select cust_name from customers;
+select email from customers;
+select amount from customers;
+select amount AS puchase from customers;       #aliasing
+select*from customers;
+update customers SET email='jaga@gmail.com' where id=1;   #change kumu@123 id to jaga@gmail.com
+update customers SET amount= 900 where id=6;        #change meena amount 500 to 900
+update customers SET cust_name='kumuar' where id=5;    #change rannu name to kumuar
+delete from customers where id=3;
+select*from customers;
+
+#aggregation functions
+use kumudaas;
+create table student(
+student_id int not null auto_increment,
+email varchar(60),
+stu_fname varchar(60),
+stu_lname varchar(60),
+login_count int,
+course_count int,
+signup_month int,
+primary key(student_id)
+);
+insert into student(email,stu_fname,stu_lname,login_count,course_count,signup_month)values('kumu@123','kumuda','A',01,05,09),
+('bob.morris@example.com', 'Bob', 'Morris', 7, 2, 2),
+('charlie.brown@example.com', 'Charlie', 'Brown', 10, 4, 3),
+('diana.smith@example.com', 'Diana', 'Smith', 22, 5, 4),
+('ethan.james@example.com', 'Ethan', 'James', 5, 1, 5),
+('fiona.jones@example.com', 'Fiona', 'Jones', 13, 3, 6),
+('george.white@example.com', 'George', 'White', 18, 4, 7),
+('hannah.miller@example.com', 'Hannah', 'Miller', 12, 2, 8),
+('ian.clark@example.com', 'Ian', 'Clark', 9, 2, 9),
+('julia.lee@example.com', 'Julia', 'Lee', 16, 3, 10),
+('kyle.davis@example.com', 'Kyle', 'Davis', 8, 1, 11),
+('lisa.moore@example.com', 'Lisa', 'Moore', 21, 5, 12),
+('matt.turner@example.com', 'Matt', 'Turner', 4, 1, 1),
+('nina.taylor@example.com', 'Nina', 'Taylor', 14, 3, 2),
+('owen.king@example.com', 'Owen', 'King', 11, 2, 3),
+('paula.scott@example.com', 'Paula', 'Scott', 6, 1, 4),
+('quentin.young@example.com', 'Quentin', 'Young', 19, 4, 5),
+('rachel.adams@example.com', 'Rachel', 'Adams', 20, 5, 6),
+('steve.hall@example.com', 'Steve', 'Hall', 17, 3, 7),
+('tina.baker@example.com', 'Tina', 'Baker', 3, 1, 8);
+select*from student;
+ 
+#give me full name of all the students
+#give me full name and login count of all users.
+select concat(stu_fname,'   ',stu_lname) as fullname,login_count from student;
+
+#give me full name of all the students
+#give me full name and login count of all users.
+#while getting all firstname, change a to @
+select stu_fname,login_count from student;
+select replace(stu_fname,'a','@')as fullnamewitha from student;
+
+
+#give me full name of all the students
+#give me full name and login count of all users.
+#while getting all firstname,change a to @
+#get all list of emails,if email is longer than 7 character,truncate it with...........
+select email from student;
+select concat(substring(email,1,7),'...')as truncate from student;
+
+
+
+#get me lengths of all emails
+select email,char_length(email)as length from student;
+select reverse(email) from student;
+
+
+#get me lengths of all emails
+#get the firstname in uppercase of our students
+select stu_fname from student;
+select upper(stu_fname) from student;
+
