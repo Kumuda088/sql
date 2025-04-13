@@ -1,0 +1,42 @@
+select database();
+create table shirts(
+shirt_type varchar(50),
+quantity int
+);
+insert into shirts(shirt_type,quantity)values("formal",12);
+insert into shirts(shirt_type,quantity)values("laglah",89);
+insert into shirts(shirt_type,quantity)values("lbbb",90);
+select*from shirts;
+select quantity from shirts;
+select*from shirts where quantity=12;
+select*from shirts where quantity<50;
+select*from shirts where quantity>50;
+select shirt_type from shirts where quantity>=50;
+select shirt_type from shirts where quantity<=50;
+select*from shirts where quantity>12 AND quantity<100;
+select*from shirts where quantity>12 OR quantity<10;
+select*from shirts where quantity between 10 and 100;
+select*from shirts where not shirt_type="lbbb";
+insert into shirts(shirt_type)values("party wear");
+select*from shirts;
+insert into shirts(quantity)value(35);
+select*from shirts;
+create table customers(
+id int not null auto_increment,
+cust_name varchar(50) not null,
+email varchar(50) not null default'no email',
+amount int,
+primary key(id)
+);
+show tables;
+insert into customers(cust_name,email,amount)values("kumuda","kumu@1234",500);
+insert into customers(cust_name,email,amount)values("ammu","ammu@1234",500);
+insert into customers(cust_name,amount)values("nammu",599);
+insert into customers(cust_name,email,amount)values("munnu","munnu@1234",500);
+insert into customers(cust_name,email,amount)values("rannu","rannu@1234",500);
+insert into customers(cust_name,email,amount)values("meena","meena@1234",500);
+select*from customers;
+select cust_name from customers;
+select email from customers;
+select amount from customers;
+select amount AS puchase from customers;       #aliasing
